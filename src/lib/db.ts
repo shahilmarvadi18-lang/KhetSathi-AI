@@ -1,0 +1,91 @@
+import { supabase } from './supabase'
+import { DB_LIMITS } from '@/lib/config'
+
+export async function getOrCreateProfile(email: string, name?: string, avatar?: string) {
+  // upsert avoids the SELECT-then-INSERT race condition on concurrent first-logins
+  const { data } = await supabase
+    .from('profiles')
+    .upsert(
+      { email, name, avatar_url: avatar, notifications: { weather: true, disease: true, market: true, irrigation: true } },
+      { onConflict: 'email', ignoreDuplicates: true }
+    )
+    .select()
+    .single()
+
+  // ignoreDuplicates means existing row isn't touched; fetch it if upsert returned nothing
+  if (data) return data
+
+  const { data: existing } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('email', email)
+    .single()
+
+  return existing
+}
+
+export async function updateProfile(email: string, updates: any) {
+  const { data } = await supabase
+    .from('profiles')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('email', email)
+    .select()
+    .single()
+  return data
+}
+
+export async function saveScan(email: string, scan: any) {
+  const { data } = await supabase
+    .from('disease_scans')
+    .insert({ user_email: email, ...scan })
+    .select()
+    .single()
+  return data
+}
+
+export async function getUserScans(email: string) {
+  const { data } = await supabase
+    .from('disease_scans')
+    .select('*')
+    .eq('user_email', email)
+    .order('created_at', { ascending: false })
+    .limit(DB_LIMITS.scans)
+  return data ?? []
+}
+
+export async function saveAlert(email: string, alert: any) {
+  const { data } = await supabase
+    .from('farm_alerts')
+    .insert({ user_email: email, ...alert })
+    .select()
+    .single()
+  return data
+}
+
+export async function getUserAlerts(email: string) {
+  const { data } = await supabase
+    .from('farm_alerts')
+    .select('*')
+    .eq('user_email', email)
+    .order('created_at', { ascending: false })
+    .limit(DB_LIMITS.alerts)
+  return data ?? []
+}
+
+export async function markAlertRead(id: string) {
+  await supabase
+    .from('farm_alerts')
+    .update({ is_read: true })
+    .eq('id', id)
+}
+
+export async function getUserStats(email: string) {
+  const [scans, alerts] = await Promise.all([
+    supabase.from('disease_scans').select('id', { count: 'exact' }).eq('user_email', email),
+    supabase.from('farm_alerts').select('id', { count: 'exact' }).eq('user_email', email).eq('is_read', false),
+  ])
+  return {
+    scans: scans.count ?? 0,
+    alerts: alerts.count ?? 0,
+  }
+}
