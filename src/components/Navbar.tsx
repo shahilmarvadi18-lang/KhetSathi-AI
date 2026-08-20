@@ -18,7 +18,7 @@ export default function Navbar() {
     { label: t('features'),  href: '/features' },
     { label: t('market'),    href: '/market' },
     { label: t('advisory'),  href: '/advisory' },
-    { label: 'Planner', href: '/calendar' },
+    { label: t('planner'), href: '/calendar' },
   ]
 
   function closeMenu() { setOpen(false) }

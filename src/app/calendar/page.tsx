@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import { useLocation } from '@/context/LocationContext'
+import { useLang } from '@/context/LanguageContext'
 import { DEFAULT_LOCATION } from '@/lib/config'
 
 type Task = { id: string; day: string; title: string; detail: string; icon: string; done: boolean }
@@ -15,8 +16,24 @@ const INITIAL_TASKS: Task[] = [
   { id: 'market-check', day: 'This week', title: 'Check Mandi prices', detail: 'Compare local market prices before planning sales.', icon: '📈', done: false },
 ]
 
+const TASK_TRANSLATIONS = {
+  en: {
+    'morning-check': { day: 'Today', title: 'Morning field walk', detail: 'Inspect leaves for pests, wilting, and standing water.' },
+    irrigation: { day: 'Today', title: 'Review irrigation need', detail: 'Use Farm Pulse weather guidance before watering.' },
+    'crop-photo': { day: 'Tomorrow', title: 'Scan one crop section', detail: 'Upload a clear leaf photo to record crop health.' },
+    'market-check': { day: 'This week', title: 'Check Mandi prices', detail: 'Compare local market prices before planning sales.' },
+  },
+  hi: {
+    'morning-check': { day: 'आज', title: 'सुबह खेत का निरीक्षण', detail: 'कीट, मुरझाई पत्तियों और जमा पानी के लिए पत्तियों की जांच करें।' },
+    irrigation: { day: 'आज', title: 'सिंचाई की जरूरत जांचें', detail: 'पानी देने से पहले Farm Pulse की मौसम सलाह देखें।' },
+    'crop-photo': { day: 'कल', title: 'फसल के एक हिस्से को स्कैन करें', detail: 'फसल का स्वास्थ्य दर्ज करने के लिए पत्तियों की साफ फोटो अपलोड करें।' },
+    'market-check': { day: 'इस सप्ताह', title: 'मंडी भाव जांचें', detail: 'बिक्री की योजना से पहले स्थानीय मंडी भाव की तुलना करें।' },
+  },
+} as const
+
 export default function CalendarPage() {
   const { location } = useLocation()
+  const { lang } = useLang()
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
 
   useEffect(() => {
@@ -34,6 +51,17 @@ export default function CalendarPage() {
 
   const completed = tasks.filter(task => task.done).length
   const displayLocation = location?.display ?? DEFAULT_LOCATION.display
+  const copy = lang === 'hi'
+    ? {
+        tag: 'खेत योजनाकार', title: 'आपका फसल कैलेंडर', actionsComplete: 'कार्य पूरे', nextActions: 'अगले खेत के कार्य', tapToComplete: 'पूरा करने के लिए टैप करें',
+        smartRoutine: 'स्मार्ट दिनचर्या', routineTitle: 'हर दिन मौसम देखकर शुरू करें, फिर अपने खेत का निरीक्षण करें।', routineDetail: 'आपका Farm Pulse लाइव स्थिति के साथ इन निर्णयों को अपडेट करता है।', openPulse: 'Farm Pulse खोलें →',
+        keepEvidence: 'रिकॉर्ड रखें', evidenceDetail: 'बेहतर AI सलाह के लिए अपनी डायरी में अवलोकन और उपचार दर्ज करें।', openJournal: 'Farm Journal खोलें →', locationPrefix: 'के लिए सरल दैनिक कार्य।',
+      }
+    : {
+        tag: 'Farm Planner', title: 'Your crop calendar', actionsComplete: 'actions complete', nextActions: 'Next field actions', tapToComplete: 'Tap to mark complete',
+        smartRoutine: 'SMART ROUTINE', routineTitle: 'Start every day with weather, then inspect your field.', routineDetail: 'Your Farm Pulse updates these decisions with live conditions.', openPulse: 'Open Farm Pulse →',
+        keepEvidence: 'Keep evidence', evidenceDetail: 'Record observations and treatments in your journal for better AI advice.', openJournal: 'Open Farm Journal →', locationPrefix: 'Simple daily actions for',
+      }
 
   return (
     <main className="relative min-h-screen" style={{ background: '#f5f0e8' }}>
@@ -42,38 +70,41 @@ export default function CalendarPage() {
       <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
           <div>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ color: '#16a34a', background: 'rgba(22,163,74,0.09)', border: '1px solid rgba(22,163,74,0.18)' }}>Farm Planner</span>
-            <h1 className="font-serif text-4xl mt-3" style={{ color: '#1a1a14' }}>Your crop calendar</h1>
-            <p className="text-sm mt-2" style={{ color: '#6a6a5a' }}>Simple daily actions for {displayLocation}.</p>
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ color: '#16a34a', background: 'rgba(22,163,74,0.09)', border: '1px solid rgba(22,163,74,0.18)' }}>{copy.tag}</span>
+            <h1 className="font-serif text-4xl mt-3" style={{ color: '#1a1a14' }}>{copy.title}</h1>
+            <p className="text-sm mt-2" style={{ color: '#6a6a5a' }}>{copy.locationPrefix} {displayLocation}.</p>
           </div>
           <div className="rounded-xl px-4 py-3 text-sm" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-            <strong style={{ color: '#16a34a' }}>{completed}/{tasks.length}</strong><span style={{ color: '#8a8a7a' }}> actions complete</span>
+            <strong style={{ color: '#16a34a' }}>{completed}/{tasks.length}</strong><span style={{ color: '#8a8a7a' }}> {copy.actionsComplete}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5">
           <section className="rounded-2xl p-5" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-            <div className="flex items-center justify-between mb-4"><h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>Next field actions</h2><span className="text-xs" style={{ color: '#8a8a7a' }}>Tap to mark complete</span></div>
+            <div className="flex items-center justify-between mb-4"><h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>{copy.nextActions}</h2><span className="text-xs" style={{ color: '#8a8a7a' }}>{copy.tapToComplete}</span></div>
             <div className="space-y-3">
-              {tasks.map(task => (
+              {tasks.map(task => {
+                const translatedTask = TASK_TRANSLATIONS[lang][task.id as keyof typeof TASK_TRANSLATIONS.en]
+                return (
                 <button key={task.id} onClick={() => toggleTask(task.id)} className="w-full flex items-start gap-3 text-left p-4 rounded-xl transition-all" style={{ background: task.done ? 'rgba(22,163,74,0.06)' : 'rgba(0,0,0,0.018)', border: `1px solid ${task.done ? 'rgba(22,163,74,0.20)' : 'rgba(0,0,0,0.07)'}` }}>
                   <span className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: task.done ? '#16a34a' : 'white', border: `1px solid ${task.done ? '#16a34a' : 'rgba(0,0,0,0.16)'}`, color: 'white' }}>{task.done ? '✓' : ''}</span>
-                  <span className="flex-1"><span className="flex items-center justify-between gap-3"><span className="text-sm font-semibold" style={{ color: task.done ? '#6a6a5a' : '#1a1a14', textDecoration: task.done ? 'line-through' : 'none' }}>{task.icon} {task.title}</span><span className="text-xs" style={{ color: '#16a34a' }}>{task.day}</span></span><span className="block text-xs mt-1" style={{ color: '#8a8a7a' }}>{task.detail}</span></span>
+                  <span className="flex-1"><span className="flex items-center justify-between gap-3"><span className="text-sm font-semibold" style={{ color: task.done ? '#6a6a5a' : '#1a1a14', textDecoration: task.done ? 'line-through' : 'none' }}>{task.icon} {translatedTask?.title ?? task.title}</span><span className="text-xs" style={{ color: '#16a34a' }}>{translatedTask?.day ?? task.day}</span></span><span className="block text-xs mt-1" style={{ color: '#8a8a7a' }}>{translatedTask?.detail ?? task.detail}</span></span>
                 </button>
-              ))}
+                )
+              })}
             </div>
           </section>
           <aside className="space-y-4">
             <div className="rounded-2xl p-5" style={{ background: '#102517', border: '1px solid rgba(74,222,128,0.16)' }}>
-              <p className="text-xs font-semibold" style={{ color: '#86efac' }}>SMART ROUTINE</p>
-              <p className="text-sm font-semibold mt-2 text-white">Start every day with weather, then inspect your field.</p>
-              <p className="text-xs mt-2" style={{ color: 'rgba(220,252,231,0.55)' }}>Your Farm Pulse updates these decisions with live conditions.</p>
-              <Link href="/dashboard" className="inline-block mt-4 text-xs font-semibold" style={{ color: '#4ade80' }}>Open Farm Pulse →</Link>
+              <p className="text-xs font-semibold" style={{ color: '#86efac' }}>{copy.smartRoutine}</p>
+              <p className="text-sm font-semibold mt-2 text-white">{copy.routineTitle}</p>
+              <p className="text-xs mt-2" style={{ color: 'rgba(220,252,231,0.55)' }}>{copy.routineDetail}</p>
+              <Link href="/dashboard" className="inline-block mt-4 text-xs font-semibold" style={{ color: '#4ade80' }}>{copy.openPulse}</Link>
             </div>
             <div className="rounded-2xl p-5" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-              <p className="text-sm font-semibold" style={{ color: '#1a1a14' }}>Keep evidence</p>
-              <p className="text-xs mt-1.5" style={{ color: '#8a8a7a' }}>Record observations and treatments in your journal for better AI advice.</p>
-              <Link href="/journal" className="inline-block mt-4 text-xs font-semibold" style={{ color: '#16a34a' }}>Open Farm Journal →</Link>
+              <p className="text-sm font-semibold" style={{ color: '#1a1a14' }}>{copy.keepEvidence}</p>
+              <p className="text-xs mt-1.5" style={{ color: '#8a8a7a' }}>{copy.evidenceDetail}</p>
+              <Link href="/journal" className="inline-block mt-4 text-xs font-semibold" style={{ color: '#16a34a' }}>{copy.openJournal}</Link>
             </div>
           </aside>
         </div>
