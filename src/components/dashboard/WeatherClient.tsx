@@ -33,8 +33,8 @@ export default function WeatherClient() {
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(14,28,16,0.8)', border: '1px solid rgba(74,222,128,0.08)' }}>
       <div className="p-5 pb-4" style={{ background: 'linear-gradient(135deg, rgba(74,222,128,0.06) 0%, transparent 60%)' }}>
-        <div className="flex items-start justify-between mb-4">
-          <div>
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="min-w-0">
             <h2 className="text-sm font-semibold text-green-100 mb-1">{t('weatherForecast')}</h2>
             <div className="flex items-center gap-1.5">
               <span className="text-xs" style={{ color: 'rgba(74,222,128,0.6)' }}>📍</span>
@@ -45,14 +45,14 @@ export default function WeatherClient() {
               <span className="text-xs px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(74,222,128,0.1)', color: '#4ade80', fontSize: 10 }}>{t('live')}</span>
             </div>
           </div>
-          <div className="text-right">
+          <div className="text-right flex-shrink-0">
             <div className="text-5xl font-bold leading-none" style={{ color: '#86efac' }}>{Math.round(current.main.temp)}°</div>
             <div className="text-xs capitalize mt-1" style={{ color: 'rgba(232,245,226,0.4)' }}>
               {icon(current.weather[0].main)} {current.weather[0].description}
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {[
             { label: t('humidity'), value: `${current.main.humidity}%`, ic: '💧' },
             { label: t('wind'), value: `${Math.round(current.wind.speed * 3.6)}km/h`, ic: '🌬️' },
@@ -67,8 +67,8 @@ export default function WeatherClient() {
           ))}
         </div>
       </div>
-      <div className="px-5 pb-4">
-        <div className="grid grid-cols-7 gap-1">
+      <div className="px-5 pb-4 overflow-x-auto">
+        <div className="grid grid-cols-7 gap-1 min-w-[420px]">
           {forecast.map((item, i) => (
             <div key={item.dt} className="text-center py-2.5 px-1 rounded-xl"
               style={i===0?{background:'rgba(74,222,128,0.1)',border:'1px solid rgba(74,222,128,0.2)'}:{}}>

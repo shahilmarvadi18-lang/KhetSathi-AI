@@ -40,12 +40,12 @@ export default function DashboardHeader() {
           {t('liveData')}
         </span>
       </div>
-      <h1 className="font-serif text-4xl leading-tight" style={{ color: '#1a1a14' }}>
+      <h1 className="font-serif text-3xl sm:text-4xl leading-tight break-words" style={{ color: '#1a1a14' }}>
         {profile?.farm_name ?? 'My Farm'}{' '}
         <span style={{ color: '#8a8a7a' }}>{t('farmDashboard')}</span>
       </h1>
       {locDisplay && (
-        <p className="text-sm mt-1.5 flex items-center gap-1.5" style={{ color: '#6a6a5a' }}>
+        <p className="text-sm mt-1.5 flex items-start gap-1.5 break-words" style={{ color: '#6a6a5a' }}>
           <span>📍</span>{locDisplay}
         </p>
       )}

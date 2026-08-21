@@ -12,10 +12,10 @@ export default function MarketPage() {
     <main className="relative min-h-screen" style={{ backgroundColor: '#f5f0e8' }}>
       <div className="absolute inset-0 grid-bg pointer-events-none" />
       <Navbar />
-      <div className="max-w-6xl mx-auto px-8 py-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="mb-8">
           <p className="text-xs font-medium mb-1" style={{ color: '#16a34a' }}>Live market data 📈</p>
-          <h1 className="font-serif text-4xl mb-2" style={{ color: '#1a1a14' }}>{t('mandiIntelligence')}</h1>
+          <h1 className="font-serif text-3xl sm:text-4xl mb-2" style={{ color: '#1a1a14' }}>{t('mandiIntelligence')}</h1>
           <p className="text-sm" style={{ color: '#6a6a5a' }}>{t('govtMandi')}</p>
         </div>
         <MarketHero />

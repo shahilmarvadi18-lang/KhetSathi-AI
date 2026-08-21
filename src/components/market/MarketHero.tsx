@@ -18,7 +18,7 @@ export default function MarketHero() {
   }, [])
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+    <div className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
       {loading ? [1,2,3,4].map(i => (
         <div key={i} className="rounded-xl p-4 h-28 animate-pulse" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }} />
       )) : error ? (

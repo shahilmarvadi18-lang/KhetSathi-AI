@@ -10,14 +10,14 @@ export default function SignInPage() {
     <main className="relative min-h-screen flex items-center justify-center" style={{ backgroundColor: '#f5f0e8' }}>
       <div className="absolute inset-0 grid-bg pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-sm mx-auto px-6">
+      <div className="relative z-10 w-full max-w-sm mx-auto px-4 sm:px-6 py-6">
         {/* Logo */}
         <div className="flex items-center justify-center mb-8">
           <span className="flex items-center gap-2 font-bold text-xl tracking-tight" style={{ color: '#1a1a14' }}><BrandMark size={32} />KhetSathi <span style={{ color: '#16a34a' }}>AI</span></span>
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl p-8" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.1)', boxShadow: '0 4px 32px rgba(0,0,0,0.08)' }}>
+        <div className="rounded-2xl p-5 sm:p-8" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.1)', boxShadow: '0 4px 32px rgba(0,0,0,0.08)' }}>
           <h1 className="font-serif text-3xl mb-1 text-center" style={{ color: '#1a1a14' }}>{t('welcomeBack')}</h1>
           <p className="text-sm text-center mb-8" style={{ color: '#8a8a7a' }}>{t('signInAccess')}</p>
 

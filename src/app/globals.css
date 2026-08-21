@@ -17,7 +17,11 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background-color: var(--bg); font-family: 'Bricolage Grotesque', sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.6; }
+html { overflow-x: hidden; }
+body { min-width: 320px; overflow-x: hidden; background-color: var(--bg); font-family: 'Bricolage Grotesque', sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.6; }
+img, svg, video, canvas { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
 body, h1, h2, h3, h4 { color: var(--text-1); }
 h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; line-height: 1.2; }
 
@@ -86,7 +90,33 @@ h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; line-height: 1.2; }
 }
 
 @media (max-width: 600px) {
+  .hero-section { padding: 40px 20px; gap: 32px; }
+  .hero-h1 { font-size: clamp(36px, 11vw, 46px); }
+  .hero-pill { white-space: normal; }
+  .hero-ctas { flex-direction: column; margin-bottom: 32px; }
+  .cta-primary, .cta-secondary { justify-content: center; width: 100%; padding-inline: 16px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-top: 24px; }
+  .stat-divider { display: none; }
+  .stat-label { overflow-wrap: anywhere; }
+  .hero-visual { height: 260px; }
+  .hv-center { font-size: 60px; }
+  .hv-card { max-width: calc(100% - 20px); padding: 9px 10px; gap: 7px; white-space: normal; }
+  .hv-card-1 { left: 0; } .hv-card-2 { right: 0; } .hv-card-3 { left: 0; } .hv-card-4 { right: 0; }
+  .hv-icon { font-size: 16px; }
+  .hv-label { font-size: 9px; } .hv-val { font-size: 11px; }
   .features-grid { grid-template-columns: 1fr; }
+  .feature-card { padding: 20px; }
+  .features-header { margin-bottom: 32px; }
+  .features-h2 { font-size: 32px; }
+  .cta-band { padding-inline: 20px; }
+  .cta-band-inner { padding: 36px 20px; border-radius: 18px; }
+  .cta-band-btn { width: 100%; padding-inline: 16px !important; }
   .hero-stats { gap: 20px; }
   .stat-val { font-size: 22px; }
+}
+
+@media (max-width: 374px) {
+  .hero-visual { height: 230px; }
+  .hv-card { max-width: calc(100% - 8px); }
+  .hv-card-2 { top: 27%; } .hv-card-3 { bottom: 25%; }
 }

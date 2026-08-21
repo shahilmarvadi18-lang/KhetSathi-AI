@@ -71,7 +71,7 @@ export default function CalendarPage() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
           <div>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ color: '#16a34a', background: 'rgba(22,163,74,0.09)', border: '1px solid rgba(22,163,74,0.18)' }}>{copy.tag}</span>
-            <h1 className="font-serif text-4xl mt-3" style={{ color: '#1a1a14' }}>{copy.title}</h1>
+            <h1 className="font-serif text-3xl sm:text-4xl mt-3" style={{ color: '#1a1a14' }}>{copy.title}</h1>
             <p className="text-sm mt-2" style={{ color: '#6a6a5a' }}>{copy.locationPrefix} {displayLocation}.</p>
           </div>
           <div className="rounded-xl px-4 py-3 text-sm" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
@@ -81,14 +81,14 @@ export default function CalendarPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5">
           <section className="rounded-2xl p-5" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-            <div className="flex items-center justify-between mb-4"><h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>{copy.nextActions}</h2><span className="text-xs" style={{ color: '#8a8a7a' }}>{copy.tapToComplete}</span></div>
+            <div className="flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-1 mb-4"><h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>{copy.nextActions}</h2><span className="text-xs" style={{ color: '#8a8a7a' }}>{copy.tapToComplete}</span></div>
             <div className="space-y-3">
               {tasks.map(task => {
                 const translatedTask = TASK_TRANSLATIONS[lang][task.id as keyof typeof TASK_TRANSLATIONS.en]
                 return (
                 <button key={task.id} onClick={() => toggleTask(task.id)} className="w-full flex items-start gap-3 text-left p-4 rounded-xl transition-all" style={{ background: task.done ? 'rgba(22,163,74,0.06)' : 'rgba(0,0,0,0.018)', border: `1px solid ${task.done ? 'rgba(22,163,74,0.20)' : 'rgba(0,0,0,0.07)'}` }}>
                   <span className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: task.done ? '#16a34a' : 'white', border: `1px solid ${task.done ? '#16a34a' : 'rgba(0,0,0,0.16)'}`, color: 'white' }}>{task.done ? '✓' : ''}</span>
-                  <span className="flex-1"><span className="flex items-center justify-between gap-3"><span className="text-sm font-semibold" style={{ color: task.done ? '#6a6a5a' : '#1a1a14', textDecoration: task.done ? 'line-through' : 'none' }}>{task.icon} {translatedTask?.title ?? task.title}</span><span className="text-xs" style={{ color: '#16a34a' }}>{translatedTask?.day ?? task.day}</span></span><span className="block text-xs mt-1" style={{ color: '#8a8a7a' }}>{translatedTask?.detail ?? task.detail}</span></span>
+                  <span className="flex-1 min-w-0"><span className="flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-1 min-[420px]:gap-3"><span className="text-sm font-semibold" style={{ color: task.done ? '#6a6a5a' : '#1a1a14', textDecoration: task.done ? 'line-through' : 'none' }}>{task.icon} {translatedTask?.title ?? task.title}</span><span className="text-xs" style={{ color: '#16a34a' }}>{translatedTask?.day ?? task.day}</span></span><span className="block text-xs mt-1" style={{ color: '#8a8a7a' }}>{translatedTask?.detail ?? task.detail}</span></span>
                 </button>
                 )
               })}

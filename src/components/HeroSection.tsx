@@ -13,14 +13,14 @@ export default function HeroSection() {
   const router = useRouter()
 
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div>
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-400/10 border border-green-400/25 text-xs text-green-400 mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 pulse-dot" />
           AI-powered smart farming platform
         </div>
 
-        <h1 className="font-serif text-5xl lg:text-6xl leading-tight text-green-50 mb-4 tracking-tight">
+        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl leading-tight text-green-50 mb-4 tracking-tight">
           Farm <em className="text-green-400 not-italic">smarter</em>,<br />
           harvest better.
         </h1>
@@ -54,7 +54,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="relative px-6">
+      <div className="relative px-0 sm:px-6">
         <FieldCard />
       </div>
     </section>

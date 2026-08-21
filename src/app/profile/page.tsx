@@ -49,7 +49,7 @@ export default function ProfilePage() {
                 {t('accountSettingsTag')}
               </span>
             </div>
-            <h1 className="font-serif text-5xl mb-2" style={{ color: '#111111', letterSpacing: '-0.02em' }}>
+            <h1 className="font-serif text-3xl sm:text-5xl mb-2" style={{ color: '#111111', letterSpacing: '-0.02em' }}>
               {t('profileSettings')}
             </h1>
             <p className="text-sm" style={{ color: 'rgba(30,30,20,0.4)' }}>{t('manageProfile')}</p>

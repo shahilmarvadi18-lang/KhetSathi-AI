@@ -65,7 +65,7 @@ export default function ProfileCard() {
         <h2 className="text-base font-semibold mb-0.5" style={{ color: '#111111', letterSpacing: '-0.01em' }}>
           {session?.user?.name ?? '—'}
         </h2>
-        <p className="text-xs mb-3" style={{ color: '#8a8a7a', fontFamily: 'monospace' }}>
+        <p className="text-xs mb-3 break-all" style={{ color: '#8a8a7a', fontFamily: 'monospace' }}>
           {session?.user?.email ?? '—'}
         </p>
 

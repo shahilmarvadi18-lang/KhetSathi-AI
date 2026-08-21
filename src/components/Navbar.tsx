@@ -30,7 +30,7 @@ export default function Navbar() {
         borderBottom: '1px solid rgba(0,0,0,0.08)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-      }} className="relative z-20 flex items-center justify-between px-8 py-4">
+      }} className="relative z-20 flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
 
         {/* Logo */}
         <Link href="/" className="flex items-center no-underline flex-shrink-0">
@@ -38,7 +38,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links — centered */}
-        <div className="hidden md:flex items-center gap-7 text-sm absolute left-1/2 -translate-x-1/2">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7 text-sm absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
           {navLinks.map(({ label, href }) => (
             <Link key={href} href={href}
               className="no-underline transition-colors"
@@ -63,7 +63,7 @@ export default function Navbar() {
           <LanguageSwitcher />
 
           {/* Desktop auth */}
-          <div className="hidden md:flex items-center gap-2.5">
+          <div className="hidden lg:flex items-center gap-2.5">
             {session ? (
               <div className="flex items-center gap-3">
                 <span className="text-xs" style={{ color: '#8a8a7a' }}>{session.user?.name}</span>
@@ -109,7 +109,7 @@ export default function Navbar() {
 
           {/* Hamburger — mobile only */}
           <button
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 rounded-lg transition-all"
+            className="lg:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-lg transition-all flex-shrink-0"
             onClick={() => setOpen(o => !o)}
             aria-label="Toggle menu"
             style={{ background: open ? 'rgba(22,163,74,0.08)' : 'transparent' }}>
@@ -125,11 +125,11 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="md:hidden fixed inset-0 z-30 flex flex-col"
+        <div className="lg:hidden fixed inset-0 z-30 flex flex-col overflow-y-auto"
           style={{ background: 'rgba(245,240,232,0.97)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
 
           {/* Drawer top bar */}
-          <div className="flex items-center justify-between px-8 py-4"
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4"
             style={{ borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
             <span className="flex items-center gap-2 font-bold text-base tracking-tight" style={{ color: '#1a1a14' }}><BrandMark size={27} />KhetSathi <span style={{ color: '#16a34a' }}>AI</span></span>
             <button onClick={closeMenu} className="w-8 h-8 flex items-center justify-center rounded-lg"
@@ -142,7 +142,7 @@ export default function Navbar() {
           </div>
 
           {/* Links */}
-          <div className="flex flex-col px-8 py-6 gap-1 flex-1">
+          <div className="flex flex-col px-4 sm:px-6 py-5 sm:py-6 gap-1 flex-1">
             {navLinks.map(({ label, href }) => (
               <Link key={href} href={href} onClick={closeMenu}
                 className="no-underline py-3.5 text-base font-medium transition-colors"

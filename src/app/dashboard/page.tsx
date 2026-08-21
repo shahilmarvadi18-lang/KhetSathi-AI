@@ -43,11 +43,11 @@ function LocationInit() {
 
 export default function DashboardPage() {
   return (
-    <main className="overflow-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <div className="absolute inset-0 grid-bg pointer-events-none" />
       <LocationInit />
       <Navbar />
-      <div className="max-w-7xl mx-auto px-8 py-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <DashboardHeader />
         <FarmPulse />
         <DashboardStats />

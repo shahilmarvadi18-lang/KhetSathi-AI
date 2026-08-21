@@ -77,12 +77,12 @@ export default function FeaturesPage() {
       <Navbar />
 
       {/* HERO */}
-      <section className="max-w-5xl mx-auto px-8 py-20 text-center">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-xs" style={{ background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', color: '#4ade80' }}>
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
           {lang === 'hi' ? '6 शक्तिशाली विशेषताएं' : '6 powerful features'}
         </div>
-        <h1 className="font-serif text-5xl lg:text-6xl mb-5 leading-tight" style={{ color: '#1a1a14' }}>{t('everythingAFarmerNeeds')}</h1>
+        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl mb-5 leading-tight" style={{ color: '#1a1a14' }}>{t('everythingAFarmerNeeds')}</h1>
         <p className="text-base max-w-2xl mx-auto" style={{ color: 'rgba(30,30,20,0.5)', lineHeight: 1.7 }}>
           {lang === 'hi' ? 'KhetSathi AI रियल-टाइम मौसम डेटा, सरकारी मंडी भाव और आवाज़ सलाह को एक प्लेटफ़ॉर्म में जोड़ता है।' : 'KhetSathi AI combines real-time weather data, government Mandi prices, and voice advisory into one platform for Indian farmers.'}
         </p>
@@ -101,7 +101,7 @@ export default function FeaturesPage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="max-w-6xl mx-auto px-8 pb-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20">
         <div className="text-center mb-12">
           <p className="text-xs mb-3 uppercase tracking-widest" style={{ color: '#4ade80' }}>{lang === 'hi' ? 'यह कैसे काम करता है' : 'How it works'}</p>
           <h2 className="font-serif text-4xl mb-3" style={{ color: '#1a1a14' }}>{lang === 'hi' ? '4 आसान चरणों में शुरू करें' : 'Get started in 4 simple steps'}</h2>
@@ -125,7 +125,7 @@ export default function FeaturesPage() {
       </section>
 
       {/* FEATURES — 2 per row */}
-      <section className="max-w-6xl mx-auto px-8 pb-20 space-y-4">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20 space-y-4">
         <div className="text-center mb-10">
           <p className="text-xs mb-3 uppercase tracking-widest" style={{ color: '#4ade80' }}>{lang === 'hi' ? 'विशेषताएं' : 'Features'}</p>
           <h2 className="font-serif text-4xl" style={{ color: '#1a1a14' }}>{t('everythingAFarmerNeeds')}</h2>
@@ -178,7 +178,7 @@ export default function FeaturesPage() {
       </section>
 
       {/* TECH STACK */}
-      <section className="max-w-6xl mx-auto px-8 pb-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20">
         <div className="text-center mb-10">
           <p className="text-xs mb-3 uppercase tracking-widest" style={{ color: '#4ade80' }}>{lang === 'hi' ? 'तकनीक' : 'Technology'}</p>
           <h2 className="font-serif text-3xl mb-2" style={{ color: '#1a1a14' }}>{lang === 'hi' ? 'हमारी तकनीक' : 'Built with modern tech'}</h2>
@@ -203,8 +203,8 @@ export default function FeaturesPage() {
       </section>
 
       {/* CTA */}
-      <section className="max-w-6xl mx-auto px-8 pb-20">
-        <div className="relative overflow-hidden rounded-3xl p-14 text-center" style={{ background: 'white', border: '1px solid rgba(74,222,128,0.15)' }}>
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20">
+        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-10 lg:p-14 text-center" style={{ background: 'white', border: '1px solid rgba(74,222,128,0.15)' }}>
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
           <div className="text-4xl mb-5">🌱</div>
           <h2 className="font-serif text-4xl mb-3" style={{ color: '#1a1a14' }}>{t('readyToGrow')}</h2>

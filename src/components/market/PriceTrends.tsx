@@ -40,16 +40,16 @@ export default function PriceTrends() {
 
   return (
     <div className="rounded-xl p-5" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>Price Trend</h2>
           {/* Honest label — this is an illustration, not real historical data */}
           <p className="text-xs mt-0.5" style={{ color: '#b0b0a0' }}>Illustrative · based on today's price</p>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1 overflow-x-auto pb-1 -mb-1">
           {MANDI_DEFAULT_COMMODITIES.map(crop => (
             <button key={crop} onClick={() => setSelected(crop)}
-              className="text-xs px-2.5 py-1 rounded-md transition-all"
+              className="text-xs px-2.5 py-1 rounded-md transition-all whitespace-nowrap flex-shrink-0"
               style={selected === crop
                 ? { background: `${COLORS[crop]}12`, color: COLORS[crop], border: `1px solid ${COLORS[crop]}30` }
                 : { color: '#8a8a7a', border: '1px solid transparent' }}>
@@ -64,12 +64,12 @@ export default function PriceTrends() {
         </div>
       ) : (
         <>
-          <div className="flex items-end justify-between mb-3">
-            <div>
+          <div className="flex items-end justify-between gap-3 mb-3">
+            <div className="min-w-0">
               <div className="text-2xl font-bold" style={{ color: '#1a1a14' }}>{currentPrice?.price ?? 'N/A'}</div>
               <div className="text-xs" style={{ color: '#8a8a7a' }}>per quintal · {currentPrice?.market}</div>
             </div>
-            <div className="text-sm font-semibold px-3 py-1 rounded-lg"
+            <div className="text-sm font-semibold px-3 py-1 rounded-lg flex-shrink-0"
               style={{ background: currentPrice?.up ? 'rgba(22,163,74,0.08)' : 'rgba(220,38,38,0.08)', color: currentPrice?.up ? '#16a34a' : '#dc2626' }}>
               {currentPrice?.change ?? '—'}
             </div>

@@ -22,17 +22,17 @@ export default function PriceTable() {
 
   return (
     <div className="rounded-xl p-5" style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)' }}>
-      <div className="flex items-center justify-between mb-4">
-          <div>
+      <div className="flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-3 mb-4">
+          <div className="min-w-0">
             <h2 className="text-sm font-semibold" style={{ color: '#1a1a14' }}>Key commodities</h2>
             <p className="text-xs mt-0.5" style={{ color: '#8a8a7a' }}>Government Mandi records · refreshed every 15 min</p>
           </div>
         <input type="text" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)}
-          className="text-xs px-3 py-1.5 rounded-lg outline-none w-32"
+          className="text-xs px-3 py-1.5 rounded-lg outline-none w-full min-[420px]:w-32"
           style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.1)', color: '#1a1a14' }} />
       </div>
-      <div className="space-y-1">
-        <div className="grid grid-cols-4 px-2 pb-2 text-xs" style={{ borderBottom: '1px solid rgba(0,0,0,0.07)', color: '#b0b0a0', fontSize: 10 }}>
+      <div className="space-y-1 overflow-x-auto">
+        <div className="grid grid-cols-[minmax(100px,1.3fr)_minmax(76px,1fr)_minmax(60px,.8fr)_minmax(90px,1fr)] min-w-[360px] px-2 pb-2 text-xs" style={{ borderBottom: '1px solid rgba(0,0,0,0.07)', color: '#b0b0a0', fontSize: 10 }}>
           <span>Commodity</span><span>Price/q</span><span>Change</span><span>Market</span>
         </div>
         {loading ? [1, 2, 3, 4].map(i => (
@@ -42,7 +42,7 @@ export default function PriceTable() {
             Market data is temporarily unavailable. Please try again shortly.
           </div>
         ) : filtered.map(({ crop, price, change, up, market }) => (
-          <div key={crop} className="grid grid-cols-4 items-center px-2 py-2 rounded-lg transition-all"
+          <div key={crop} className="grid grid-cols-[minmax(100px,1.3fr)_minmax(76px,1fr)_minmax(60px,.8fr)_minmax(90px,1fr)] min-w-[360px] items-center px-2 py-2 rounded-lg transition-all"
             onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.025)')}
             onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
             <span className="text-xs font-medium" style={{ color: '#1a1a14' }}>{crop}</span>
