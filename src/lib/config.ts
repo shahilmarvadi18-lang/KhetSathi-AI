@@ -65,10 +65,14 @@ export const SMS = {
 export const NOMINATIM_USER_AGENT =
   process.env.NOMINATIM_USER_AGENT ?? 'KhetSathiAI/1.0'
 
+// FIXED: suffixes removed — "stat-label" niche pehlethi j "Features" /
+// "Languages" / "Live APIs" batave che, etle duplicate text lambu thai ne
+// mobile grid columns ma overflow/overlap thatu hatu. Have fakt number j
+// bade chhe (6, 2, 5) — chhoto ane crisp, koi wrap/overlap nahi thay.
 export const HERO_STATS = {
-  featuresCount:  { value: 6, suffix: ' features'  },
-  languagesCount: { value: 2, suffix: ' languages' },
-  apisCount:      { value: 5, suffix: ' live APIs'  },
+  featuresCount:  { value: 6, suffix: ''  },
+  languagesCount: { value: 2, suffix: '' },
+  apisCount:      { value: 5, suffix: ''  },
 }
 
 export const COPYRIGHT_YEAR = new Date().getFullYear()
