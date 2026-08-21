@@ -98,10 +98,12 @@ h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; line-height: 1.2; }
   .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-top: 24px; }
   .stat-divider { display: none; }
   .stat-label { overflow-wrap: anywhere; }
-  .hero-visual { height: 260px; }
-  .hv-center { font-size: 60px; }
-  .hv-card { max-width: calc(100% - 20px); padding: 9px 10px; gap: 7px; white-space: normal; }
-  .hv-card-1 { left: 0; } .hv-card-2 { right: 0; } .hv-card-3 { left: 0; } .hv-card-4 { right: 0; }
+  /* Absolute floating cards become a stable grid on phones. This prevents
+     the visual from overlapping itself when text wraps in translated UI. */
+  .hero-visual { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .hv-center { display: none; }
+  .hv-card { position: relative; inset: auto; width: auto; max-width: none; min-height: 82px; padding: 10px; gap: 7px; white-space: normal; }
+  .hv-card-1, .hv-card-2, .hv-card-3, .hv-card-4 { top: auto; right: auto; bottom: auto; left: auto; }
   .hv-icon { font-size: 16px; }
   .hv-label { font-size: 9px; } .hv-val { font-size: 11px; }
   .features-grid { grid-template-columns: 1fr; }
@@ -116,7 +118,6 @@ h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; line-height: 1.2; }
 }
 
 @media (max-width: 374px) {
-  .hero-visual { height: 230px; }
-  .hv-card { max-width: calc(100% - 8px); }
-  .hv-card-2 { top: 27%; } .hv-card-3 { bottom: 25%; }
+  .hero-visual { grid-template-columns: 1fr; }
+  .hv-card { min-height: 0; }
 }
